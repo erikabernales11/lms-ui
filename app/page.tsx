@@ -1,31 +1,33 @@
 'use client';
 
 import React, { useState } from 'react';
-import Image from 'next/image';
+import { useRouter } from 'next/navigation'; // This is the logic for moving pages
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter(); // Initialize the router
 
   const handleLogin = (e) => {
     e.preventDefault();
-    alert(`Logging in to Arellano University Portal...`);
+    // This tells the browser: "When I click Sign In, take me to /dashboard"
+    router.push('/dashboard');
   };
 
   return (
     <div className="relative min-h-screen flex items-center justify-center p-4 font-sans">
       {/* Background Image */}
       <div
-        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 z-0 bg-blue-900 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/arellano bg.jpg')", // Ensure the file extension matches your folder (.jpg or .png)
-          filter: 'brightness(0.6)',
+          backgroundImage: "url('/arellano.webp')",
+          filter: 'brightness(0.5)',
         }}
       />
 
-      <div className="relative z-10 max-w-md w-full bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-10 border border-white/20">
+      {/* Login Card */}
+      <div className="relative z-10 max-w-md w-full bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl p-10 border border-white/20">
         <div className="text-center mb-8">
-          {/* Logo Section */}
           <div className="flex justify-center mb-4">
             <img
               src="/LOGO.png"
@@ -37,24 +39,25 @@ export default function LoginPage() {
           <h1 className="text-2xl font-extrabold tracking-tight text-slate-900">
             Arellano University
           </h1>
-          <p className="text-slate-500 mt-1 text-sm font-medium">
-            Learning Management System
+          <p className="text-slate-500 mt-1 text-sm font-medium uppercase tracking-wider">
+            LMS Portal
           </p>
         </div>
 
+        {/* Form points to handleLogin */}
         <form
           onSubmit={handleLogin}
           className="space-y-5"
         >
           <div className="space-y-1">
             <label className="text-sm font-semibold text-slate-700 ml-1">
-              Email
+              Email Address
             </label>
             <input
               type="email"
               required
-              className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:bg-white outline-none transition-all text-slate-900"
-              placeholder="student.name@arellano.edu.ph"
+              className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none text-slate-900"
+              placeholder="student@arellano.edu.ph"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -67,7 +70,7 @@ export default function LoginPage() {
             <input
               type="password"
               required
-              className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:bg-white outline-none transition-all text-slate-900"
+              className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none text-slate-900"
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -76,7 +79,7 @@ export default function LoginPage() {
 
           <button
             type="submit"
-            className="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3.5 rounded-xl transition-all duration-300 transform active:scale-95 shadow-lg shadow-blue-200"
+            className="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3.5 rounded-xl transition-all shadow-lg"
           >
             Sign In
           </button>
