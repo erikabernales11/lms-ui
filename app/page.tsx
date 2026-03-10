@@ -1,65 +1,93 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import React, { useState } from 'react';
+import Image from 'next/image';
+
+export default function LoginPage() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    alert(`Logging in to Arellano University Portal...`);
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="relative min-h-screen flex items-center justify-center p-4 font-sans">
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: "url('/arellano bg.jpg')", // Ensure the file extension matches your folder (.jpg or .png)
+          filter: 'brightness(0.6)',
+        }}
+      />
+
+      <div className="relative z-10 max-w-md w-full bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-10 border border-white/20">
+        <div className="text-center mb-8">
+          {/* Logo Section */}
+          <div className="flex justify-center mb-4">
+            <img
+              src="/LOGO.png"
+              alt="Arellano University Logo"
+              className="h-24 w-auto object-contain"
+            />
+          </div>
+
+          <h1 className="text-2xl font-extrabold tracking-tight text-slate-900">
+            Arellano University
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-slate-500 mt-1 text-sm font-medium">
+            Learning Management System
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+
+        <form
+          onSubmit={handleLogin}
+          className="space-y-5"
+        >
+          <div className="space-y-1">
+            <label className="text-sm font-semibold text-slate-700 ml-1">
+              Email
+            </label>
+            <input
+              type="email"
+              required
+              className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:bg-white outline-none transition-all text-slate-900"
+              placeholder="student.name@arellano.edu.ph"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          </div>
+
+          <div className="space-y-1">
+            <label className="text-sm font-semibold text-slate-700 ml-1">
+              Password
+            </label>
+            <input
+              type="password"
+              required
+              className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:bg-white outline-none transition-all text-slate-900"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3.5 rounded-xl transition-all duration-300 transform active:scale-95 shadow-lg shadow-blue-200"
           >
-            Documentation
-          </a>
+            Sign In
+          </button>
+        </form>
+
+        <div className="mt-8 text-center">
+          <button className="text-xs font-bold text-slate-400 hover:text-blue-700 transition-colors uppercase tracking-widest">
+            Forgot Credentials?
+          </button>
         </div>
-      </main>
+      </div>
     </div>
   );
 }
